@@ -1,7 +1,9 @@
+import Header from "./Header"
+
 function Dashboard() {
     return (
         <div>
-            <h1>Welcome to HaggleX Dashboard</h1>
+            <Header/>
         </div>
     )
 }
