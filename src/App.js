@@ -1,9 +1,16 @@
-
+import Dashboard from "./components/Dashboard";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
     <div className="">
-     <h1>Welcome to HaggleX Web Application</h1>
+      {/* Register */}
+      <Register/>
+      {/* Login */}
+      <Login/>
+      {/* Dashboard */}
+      <Dashboard/>
     </div>
   );
 }
