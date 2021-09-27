@@ -8,7 +8,7 @@ function App() {
       {/* Register */}
       <Register/>
       {/* Login */}
-      <Login/>
+      {/* <Login/> */}
       {/* Dashboard */}
       {/* <Dashboard/> */}
     </div>
