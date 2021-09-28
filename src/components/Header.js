@@ -1,10 +1,12 @@
 // import Image from "next/image";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag'
 import { BellIcon, ChevronDownIcon } from "@heroicons/react/solid";
 
 function Header() {
   return (
-    <div className="sticky top-0 z-50 flex justify-between shadow-md ">
+    <div className="sticky top-0 z-50 flex justify-between bg-white shadow-md ">
       <div className="flex items-center p-5">
         <img src="/hagglexlogo.png" alt="" className="h-9" />
         <h1 className="pl-2 text-xl text-blue-900 font-bold">HaggleX</h1>
@@ -25,5 +27,7 @@ function Header() {
     </div>
   );
 }
+
+
 
 export default Header;

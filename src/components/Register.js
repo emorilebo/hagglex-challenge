@@ -1,22 +1,33 @@
 import React, { useState } from "react";
+import { Query } from "react-apollo";
+import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks";
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    user: {
-      email: "",
-      password: "",
-      username: "",
-      phone: "",
-    },
+    email: "",
+    password: "",
+    username: "",
+    phonenumber: "",
   });
 
   const handleChange = (e) => {
     setFormData({
-      user: {
         ...formData.user,
         [e.target.name]: e.target.value,
-      },
     });
+  };
+
+  const [addUser, { loading }] = useMutation(REGISTER_USER, {
+    update(proxy, result) {
+      console.log(result);
+    },
+    variables: formData,
+  });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addUser();
   };
 
   return (
@@ -55,9 +66,9 @@ export default function Register() {
               </label>
               <div className="mr-9">
                 <input
-                  name="username"
+                  name="email"
                   type="text"
-                  value={formData.user.username}
+                  value={formData.email}
                   onChange={handleChange}
                   placeholder="example@mail.com"
                   className={
@@ -68,7 +79,7 @@ export default function Register() {
                 <input
                   name="password"
                   type="password"
-                  value={formData.user.password}
+                  value={formData.password}
                   onChange={handleChange}
                   placeholder="************"
                   className={
@@ -79,27 +90,29 @@ export default function Register() {
                 <input
                   name="username"
                   type="text"
-                  value={formData.user.username}
+                  value={formData.username}
                   onChange={handleChange}
                   placeholder="Chrissteve"
                   className={
                     "w-full mx-4 text-primary placeholder-text-gray-500 border-b border-black outline-none text-md transition duration-150 ease-in-out mb-4"
                   }
                 />
-                <label className="m-3 my-4 font-semibold text-sm ">Enter your phone number</label>
+                <label className="m-3 my-4 font-semibold text-sm ">
+                  Enter your phone number
+                </label>
                 <div className="flex items-center">
-                <img className="h-4 m-3" src='/nig.png'/>
-                <p>(+234)</p>
-                <input
-                  name="phone"
-                  type="number"
-                  value={formData.user.phone}
-                  onChange={handleChange}
-                  placeholder="813 000 0000"
-                  className={
-                    "w-full ml-2 -mr-4 text-primary placeholder-text-gray-500 border-b border-black outline-none text-md transition duration-150 ease-in-out mb-4"
-                  }
-                />
+                  <img className="h-4 m-3" src="/nig.png" />
+                  <p>(+234)</p>
+                  <input
+                    name="phone"
+                    type="number"
+                    value={formData.phonenumber}
+                    onChange={handleChange}
+                    placeholder="813 000 0000"
+                    className={
+                      "w-full ml-2 -mr-4 text-primary placeholder-text-gray-500 border-b border-black outline-none text-md transition duration-150 ease-in-out mb-4"
+                    }
+                  />
                 </div>
               </div>
               <a className="m-3 font-semibold text-sm text-blue-900" href="#">
@@ -107,6 +120,7 @@ export default function Register() {
               </a>
               <div className="flex items-center mt-4 justify-center">
                 <button
+                  onClick={onSubmit}
                   className={
                     "bg-blue-700 w-full hover:bg-blue-500 py-2 px-4 mx-4 text-md text-white rounded border border-blue focus:outline-none focus:border-black"
                   }
@@ -143,3 +157,28 @@ export default function Register() {
     </div>
   );
 }
+
+const REGISTER_USER = gql`
+  mutation register(
+    $email: String!
+    $password: String!
+    $username: String!
+    $phonenumber: String!
+  ) {
+    register(
+      data: {
+        email: $email
+        password: $password
+        username: $username
+        phone: $phonenumber
+      }
+    ) {
+      id
+      email
+      username
+      phonenumber
+      createdAt
+      token
+    }
+  }
+`;

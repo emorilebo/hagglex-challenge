@@ -41,7 +41,7 @@ function WalletSummary() {
                 <p>NGN</p>
               </div>
             </div>
-            <img src="/swap.png" className="h-10" />
+            <img src="/swap.png" alt="swap" className="h-10" />
           </div>
 
           <div className="m-4 border-b">

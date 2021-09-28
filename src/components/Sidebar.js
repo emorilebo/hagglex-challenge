@@ -12,13 +12,13 @@ import SidebarRow from "./SidebarRow";
 
 function Sidebar() {
   return (
-    <div className="lg:flex-row h-full justify-between my-5 px-5 border-r">
+    <div className="lg:flex-row h-full justify-between my-5 px-5 border-r sticky">
       <div className="">
         <div className="flex mx-auto md:inline-block">
           <SidebarRow Icon={ViewGridIcon} title="DASHBOARD" />
 
           <SidebarRow Icon={CreditCardIcon} title="WALLET" />
-
+ 
           <SidebarRow Icon={CreditCardIcon} title="OTC" />
           <SidebarRow Icon={CubeIcon} title="SAVINGS" />
           <SidebarRow Icon={GiftIcon} title="MORE" />
